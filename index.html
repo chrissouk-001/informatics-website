@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="el" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Μαθήματα Πληροφορικής</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dark-mode.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to bottom, #f0f4f8, #d9e2ec);
+            background-attachment: fixed;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        
+        .dark body {
+            background: linear-gradient(to bottom, #1a202c, #2d3748);
+            color: #e2e8f0;
+        }
+        
+        .dark .bg-white {
+            background-color: #1e293b !important;
+            color: #e2e8f0;
+        }
+        
+        .dark .text-gray-800 {
+            color: #e2e8f0 !important;
+        }
+        
+        .dark .text-gray-600 {
+            color: #cbd5e0 !important;
+        }
+        
+        .dark .bg-blue-50 {
+            background-color: rgba(59, 130, 246, 0.1) !important;
+        }
+        
+        .dark .bg-green-50 {
+            background-color: rgba(16, 185, 129, 0.1) !important;
+        }
+        
+        .dark .bg-purple-50 {
+            background-color: rgba(139, 92, 246, 0.1) !important;
+        }
+        
+        .dark .border-purple-100 {
+            border-color: rgba(139, 92, 246, 0.2) !important;
+        }
+        
+        .dark .bg-gray-50, .dark .bg-gray-100, .dark .bg-gray-200 {
+            background-color: #374151 !important;
+            color: #e2e8f0;
+        }
+        
+        .dark .text-blue-800, .dark .text-green-800, .dark .text-purple-900 {
+            color: #e2e8f0 !important;
+        }
+        
+        .folder {
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .dark .folder {
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .folder:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark .folder:hover {
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .folder-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+        }
+        
+        .folder-content.open {
+            max-height: 1000px;
+            transition: max-height 0.5s cubic-bezier(0.9, 0, 0.3, 0.9);
+        }
+        
+        .grade-item {
+            transition: all 0.2s ease;
+            border-left: 4px solid transparent;
+        }
+        
+        .grade-item:hover {
+            border-left-color: currentColor;
+            transform: translateX(5px);
+        }
+        
+        .modal-animation {
+            animation: modalFade 0.3s ease-out;
+        }
+        
+        @keyframes modalFade {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .search-box {
+            transition: all 0.3s ease;
+        }
+        
+        .search-box:focus {
+            width: 300px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark .search-box:focus {
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+        }
+    </style>
+</head>
+<body class="min-h-screen font-sans text-gray-800">
+    <!-- Include header -->
+    <div id="header-placeholder"></div>
+    
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+        <!-- Main Content -->
+        <main class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+            <!-- Progress Widget -->
+            <div class="lg:col-span-2 bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden mb-8">
+                <div class="p-6 flex flex-col md:flex-row items-center justify-between">
+                    <div class="mb-4 md:mb-0">
+                        <h3 class="text-xl font-bold mb-2">Η πρόοδός σου</h3>
+                        <p class="text-gray-600 dark:text-gray-400">Συνέχισε από εκεί που σταμάτησες!</p>
+                    </div>
+                    <div class="flex space-x-6 items-center">
+                        <div class="text-center">
+                            <div class="relative w-20 h-20">
+                                <svg class="w-20 h-20" viewBox="0 0 36 36">
+                                    <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#e6e6e6" stroke-width="3" stroke-dasharray="100, 100"/>
+                                    <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#4338ca" stroke-width="3" stroke-dasharray="35, 100"/>
+                                </svg>
+                                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-xl font-bold">35%</div>
+                            </div>
+                            <p class="text-sm mt-2">Συνολικά</p>
+                        </div>
+                        <div class="flex flex-col items-start">
+                            <div class="flex items-center mb-2">
+                                <div class="w-3 h-3 rounded-full bg-indigo-600 mr-2"></div>
+                                <span>Ενότητες που ολοκληρώθηκαν: <strong>7/20</strong></span>
+                            </div>
+                            <div class="flex items-center mb-2">
+                                <div class="w-3 h-3 rounded-full bg-green-500 mr-2"></div>
+                                <span>Ασκήσεις που ολοκληρώθηκαν: <strong>12/45</strong></span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
+                                <span>Τελευταία δραστηριότητα: <strong>σήμερα</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="px-5 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors flex items-center mt-4 md:mt-0">
+                        Συνέχεια
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+                <div class="bg-gray-50 dark:bg-gray-700 p-4">
+                    <h4 class="font-medium mb-3">Πρόσφατα μαθήματα</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <div class="bg-white dark:bg-gray-800 p-3 rounded-lg flex items-center">
+                            <div class="bg-blue-100 dark:bg-blue-900 p-2 rounded mr-3">
+                                <i class="fas fa-code text-blue-600 dark:text-blue-300"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-medium text-sm">Εισαγωγή στην HTML</h5>
+                                <div class="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-1.5 mt-1">
+                                    <div class="bg-blue-600 h-1.5 rounded-full" style="width: 80%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white dark:bg-gray-800 p-3 rounded-lg flex items-center">
+                            <div class="bg-green-100 dark:bg-green-900 p-2 rounded mr-3">
+                                <i class="fas fa-network-wired text-green-600 dark:text-green-300"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-medium text-sm">Δίκτυα Υπολογιστών</h5>
+                                <div class="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-1.5 mt-1">
+                                    <div class="bg-green-600 h-1.5 rounded-full" style="width: 45%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white dark:bg-gray-800 p-3 rounded-lg flex items-center">
+                            <div class="bg-purple-100 dark:bg-purple-900 p-2 rounded mr-3">
+                                <i class="fas fa-database text-purple-600 dark:text-purple-300"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-medium text-sm">Βάσεις Δεδομένων</h5>
+                                <div class="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-1.5 mt-1">
+                                    <div class="bg-purple-600 h-1.5 rounded-full" style="width: 20%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- High School Folder -->
+            <div class="folder bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden card-hover">
+                <div class="folder-header bg-gradient-to-r from-blue-600 to-blue-800 p-6 text-white cursor-pointer flex items-center justify-between" onclick="toggleFolder('lykeio')">
+                    <div class="flex items-center">
+                        <div class="bg-white bg-opacity-20 p-3 rounded-lg mr-4">
+                            <i class="fas fa-graduation-cap text-2xl"></i>
+                        </div>
+                        <span class="text-2xl font-semibold">Λύκειο</span>
+                    </div>
+                    <i class="fas fa-chevron-down text-xl transition-transform duration-300" id="lykeio-arrow"></i>
+                </div>
+                <div class="folder-content" id="lykeio-content">
+                    <div class="p-6 space-y-3">
+                        <div class="grade-item bg-blue-50 hover:bg-blue-100 rounded-lg p-5 flex items-center cursor-pointer shadow-sm text-blue-800" onclick="showGrade('lykeio', 'A')">
+                            <i class="fas fa-book text-blue-600 mr-4 text-xl"></i>
+                            <span class="font-medium">Α' Λυκείου</span>
+                            <i class="fas fa-arrow-right ml-auto opacity-50"></i>
+                        </div>
+                        <div class="grade-item bg-blue-50 hover:bg-blue-100 rounded-lg p-5 flex items-center cursor-pointer shadow-sm text-blue-800" onclick="showGrade('lykeio', 'B')">
+                            <i class="fas fa-book text-blue-600 mr-4 text-xl"></i>
+                            <span class="font-medium">Β' Λυκείου</span>
+                            <i class="fas fa-arrow-right ml-auto opacity-50"></i>
+                        </div>
+                        <div class="grade-item bg-blue-50 hover:bg-blue-100 rounded-lg p-5 flex items-center cursor-pointer shadow-sm text-blue-800" onclick="showGrade('lykeio', 'C')">
+                            <i class="fas fa-book text-blue-600 mr-4 text-xl"></i>
+                            <span class="font-medium">Γ' Λυκείου</span>
+                            <i class="fas fa-arrow-right ml-auto opacity-50"></i>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-6">
+                        <a href="pages/lykeio.html" class="block w-full py-2 text-center bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition-colors">
+                            <i class="fas fa-arrow-right mr-2"></i> Όλα τα μαθήματα Λυκείου
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Middle School Folder -->
+            <div class="folder bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden card-hover">
+                <div class="folder-header bg-gradient-to-r from-green-600 to-green-800 p-6 text-white cursor-pointer flex items-center justify-between" onclick="toggleFolder('gymnasio')">
+                    <div class="flex items-center">
+                        <div class="bg-white bg-opacity-20 p-3 rounded-lg mr-4">
+                            <i class="fas fa-school text-2xl"></i>
+                        </div>
+                        <span class="text-2xl font-semibold">Γυμνάσιο</span>
+                    </div>
+                    <i class="fas fa-chevron-down text-xl transition-transform duration-300" id="gymnasio-arrow"></i>
+                </div>
+                <div class="folder-content" id="gymnasio-content">
+                    <div class="p-6 space-y-3">
+                        <div class="grade-item bg-green-50 hover:bg-green-100 rounded-lg p-5 flex items-center cursor-pointer shadow-sm text-green-800" onclick="showGrade('gymnasio', 'A')">
+                            <i class="fas fa-book text-green-600 mr-4 text-xl"></i>
+                            <span class="font-medium">Α' Γυμνασίου</span>
+                            <i class="fas fa-arrow-right ml-auto opacity-50"></i>
+                        </div>
+                        <div class="grade-item bg-green-50 hover:bg-green-100 rounded-lg p-5 flex items-center cursor-pointer shadow-sm text-green-800" onclick="showGrade('gymnasio', 'B')">
+                            <i class="fas fa-book text-green-600 mr-4 text-xl"></i>
+                            <span class="font-medium">Β' Γυμνασίου</span>
+                            <i class="fas fa-arrow-right ml-auto opacity-50"></i>
+                        </div>
+                        <div class="grade-item bg-green-50 hover:bg-green-100 rounded-lg p-5 flex items-center cursor-pointer shadow-sm text-green-800" onclick="showGrade('gymnasio', 'C')">
+                            <i class="fas fa-book text-green-600 mr-4 text-xl"></i>
+                            <span class="font-medium">Γ' Γυμνασίου</span>
+                            <i class="fas fa-arrow-right ml-auto opacity-50"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Test Section -->
+        <section class="mb-16 bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden card-hover">
+            <div class="folder-header bg-gradient-to-r from-purple-600 to-purple-800 p-6 text-white cursor-pointer flex items-center justify-between" onclick="toggleFolder('test')">
+                <div class="flex items-center">
+                    <div class="bg-white bg-opacity-20 p-3 rounded-lg mr-4">
+                        <i class="fas fa-clipboard-check text-2xl"></i>
+                    </div>
+                    <span class="text-2xl font-semibold">Test</span>
+                </div>
+                <i class="fas fa-chevron-down text-xl transition-transform duration-300" id="test-arrow"></i>
+            </div>
+            <div class="folder-content" id="test-content">
+                <div class="p-8">
+                    <p class="text-gray-700 dark:text-gray-300 mb-8 text-lg">Εδώ μπορείτε να βρείτε τεστ και ασκήσεις για εξάσκηση.</p>
+                    
+                    <!-- Interactive Quiz (Sample) -->
+                    <div class="mb-10 bg-indigo-50 dark:bg-indigo-900/30 p-6 rounded-xl border border-indigo-100 dark:border-indigo-800">
+                        <h3 class="text-2xl font-bold mb-6 text-indigo-900 dark:text-indigo-200">Γρήγορο Quiz</h3>
+                        
+                        <div id="quiz-container">
+                            <div id="question-container" class="mb-8">
+                                <h4 class="font-medium text-lg mb-4 text-gray-800 dark:text-gray-200">Τι σημαίνει το ακρωνύμιο HTML;</h4>
+                                <div class="space-y-3">
+                                    <div class="quiz-option p-3 bg-white dark:bg-gray-800 rounded-lg cursor-pointer hover:bg-indigo-100 dark:hover:bg-indigo-800 transition-colors border-2 border-transparent" data-correct="false">
+                                        <div class="flex items-center">
+                                            <div class="w-6 h-6 rounded-full border-2 border-gray-300 dark:border-gray-600 flex items-center justify-center mr-3">
+                                                <div class="option-indicator hidden w-3 h-3 rounded-full"></div>
+                                            </div>
+                                            <span>Hyper Technical Modern Language</span>
+                                        </div>
+                                    </div>
+                                    <div class="quiz-option p-3 bg-white dark:bg-gray-800 rounded-lg cursor-pointer hover:bg-indigo-100 dark:hover:bg-indigo-800 transition-colors border-2 border-transparent" data-correct="true">
+                                        <div class="flex items-center">
+                                            <div class="w-6 h-6 rounded-full border-2 border-gray-300 dark:border-gray-600 flex items-center justify-center mr-3">
+                                                <div class="option-indicator hidden w-3 h-3 rounded-full"></div>
+                                            </div>
+                                            <span>Hypertext Markup Language</span>
+                                        </div>
+                                    </div>
+                                    <div class="quiz-option p-3 bg-white dark:bg-gray-800 rounded-lg cursor-pointer hover:bg-indigo-100 dark:hover:bg-indigo-800 transition-colors border-2 border-transparent" data-correct="false">
+                                        <div class="flex items-center">
+                                            <div class="w-6 h-6 rounded-full border-2 border-gray-300 dark:border-gray-600 flex items-center justify-center mr-3">
+                                                <div class="option-indicator hidden w-3 h-3 rounded-full"></div>
+                                            </div>
+                                            <span>High Text Machine Language</span>
+                                        </div>
+                                    </div>
+                                    <div class="quiz-option p-3 bg-white dark:bg-gray-800 rounded-lg cursor-pointer hover:bg-indigo-100 dark:hover:bg-indigo-800 transition-colors border-2 border-transparent" data-correct="false">
+                                        <div class="flex items-center">
+                                            <div class="w-6 h-6 rounded-full border-2 border-gray-300 dark:border-gray-600 flex items-center justify-center mr-3">
+                                                <div class="option-indicator hidden w-3 h-3 rounded-full"></div>
+                                            </div>
+                                            <span>Hypertext Marking Links</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="result-container" class="hidden mb-4 p-4 rounded-lg bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-200 text-center">
+                                <p class="font-medium"><i class="fas fa-check-circle mr-2"></i> Σωστά! Η HTML είναι η γλώσσα σήμανσης για τη δημιουργία ιστοσελίδων.</p>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <span class="text-sm font-medium">Ερώτηση 1 από 5</span>
+                                    <div class="w-32 bg-gray-200 dark:bg-gray-700 rounded-full h-1.5 mt-1">
+                                        <div class="bg-indigo-600 h-1.5 rounded-full" style="width: 20%"></div>
+                                    </div>
+                                </div>
+                                <a href="pages/quiz.html" class="px-5 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors flex items-center">
+                                    Περισσότερα Quiz
+                                    <i class="fas fa-arrow-right ml-2"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-purple-50 hover:bg-purple-100 rounded-xl p-6 text-center card-hover border border-purple-100">
+                            <div class="bg-purple-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-question-circle text-purple-600 text-2xl"></i>
+                            </div>
+                            <h3 class="font-semibold text-xl mb-2 text-purple-900">Quiz</h3>
+                            <p class="text-gray-600">Σύντομα ερωτήσεις για γρήγορη εξάσκηση</p>
+                            <a href="pages/quiz.html" class="inline-block mt-4 text-purple-600 font-medium hover:text-purple-800">
+                                Ξεκινήστε τώρα
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                        <div class="bg-purple-50 hover:bg-purple-100 rounded-xl p-6 text-center card-hover border border-purple-100">
+                            <div class="bg-purple-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-tasks text-purple-600 text-2xl"></i>
+                            </div>
+                            <h3 class="font-semibold text-xl mb-2 text-purple-900">Ασκήσεις</h3>
+                            <p class="text-gray-600">Πρακτική εξάσκηση για εμπέδωση</p>
+                            <button class="mt-4 text-purple-600 font-medium hover:text-purple-800">
+                                Ξεκινήστε τώρα
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </button>
+                        </div>
+                        <div class="bg-purple-50 hover:bg-purple-100 rounded-xl p-6 text-center card-hover border border-purple-100">
+                            <div class="bg-purple-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-file-alt text-purple-600 text-2xl"></i>
+                            </div>
+                            <h3 class="font-semibold text-xl mb-2 text-purple-900">Προσομοιώσεις</h3>
+                            <p class="text-gray-600">Προετοιμασία για εξετάσεις</p>
+                            <button class="mt-4 text-purple-600 font-medium hover:text-purple-800">
+                                Ξεκινήστε τώρα
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Extra Resources Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center text-gray-800 dark:text-white">Επιπλέον Πόροι</h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md text-center card-hover">
+                    <div class="bg-blue-100 dark:bg-blue-900/30 rounded-full w-14 h-14 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-video text-blue-600 dark:text-blue-400 text-xl"></i>
+                    </div>
+                    <h3 class="font-semibold mb-2">Video</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Βιντεομαθήματα</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md text-center card-hover">
+                    <div class="bg-green-100 dark:bg-green-900/30 rounded-full w-14 h-14 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-book-open text-green-600 dark:text-green-400 text-xl"></i>
+                    </div>
+                    <h3 class="font-semibold mb-2">Σημειώσεις</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Βοηθητικό υλικό</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md text-center card-hover">
+                    <div class="bg-red-100 dark:bg-red-900/30 rounded-full w-14 h-14 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-code text-red-600 dark:text-red-400 text-xl"></i>
+                    </div>
+                    <h3 class="font-semibold mb-2">Παραδείγματα</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Κώδικας & λύσεις</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md text-center card-hover">
+                    <div class="bg-yellow-100 dark:bg-yellow-900/30 rounded-full w-14 h-14 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-users text-yellow-600 dark:text-yellow-400 text-xl"></i>
+                    </div>
+                    <h3 class="font-semibold mb-2">Κοινότητα</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Συζητήσεις & βοήθεια</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Include footer -->
+    <div id="footer-placeholder"></div>
+    
+    <!-- Include modals -->
+    <div id="login-modal-placeholder"></div>
+    <div id="grade-modal-placeholder"></div>
+
+    <!-- Script to load components -->
+    <script>
+        // Load components
+        fetch('components/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+                // Initialize dark mode after header is loaded
+                const script = document.createElement('script');
+                script.src = 'js/dark-mode.js';
+                document.body.appendChild(script);
+            });
+            
+        fetch('components/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            });
+            
+        fetch('components/login-modal.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('login-modal-placeholder').innerHTML = data;
+            });
+            
+        fetch('components/grade-modal.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('grade-modal-placeholder').innerHTML = data;
+            });
+    </script>
+    
+    <!-- Main JS -->
+    <script src="js/main.js"></script>
+    <script src="js/notifications.js"></script>
+    <script src="js/quiz.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>

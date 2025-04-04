@@ -1,0 +1,55 @@
+<!-- Login Modal -->
+<div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+    <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 w-full max-w-md mx-4 shadow-2xl modal-animation">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-white">Σύνδεση</h2>
+            <button onclick="closeLoginModal()" class="bg-gray-200 dark:bg-gray-700 rounded-full w-8 h-8 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="mb-6">
+            <div class="flex justify-center space-x-4 mb-6">
+                <button class="flex-1 py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-lg flex items-center justify-center hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                    <i class="fab fa-google text-red-500 mr-2"></i>
+                    Google
+                </button>
+                <button class="flex-1 py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-lg flex items-center justify-center hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                    <i class="fab fa-facebook text-blue-600 mr-2"></i>
+                    Facebook
+                </button>
+            </div>
+            
+            <div class="flex items-center my-4">
+                <div class="flex-grow h-px bg-gray-300 dark:bg-gray-600"></div>
+                <span class="px-3 text-sm text-gray-500 dark:text-gray-400">ή</span>
+                <div class="flex-grow h-px bg-gray-300 dark:bg-gray-600"></div>
+            </div>
+            
+            <form>
+                <div class="mb-4">
+                    <label class="block text-gray-700 dark:text-gray-300 text-sm font-medium mb-2" for="email">
+                        Email
+                    </label>
+                    <input class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" id="email" type="email" placeholder="your@email.com">
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700 dark:text-gray-300 text-sm font-medium mb-2" for="password">
+                        Κωδικός
+                    </label>
+                    <input class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" id="password" type="password" placeholder="••••••••">
+                    <div class="flex justify-end mt-2">
+                        <a href="#" class="text-sm text-indigo-600 dark:text-indigo-400 hover:underline">Ξεχάσατε τον κωδικό;</a>
+                    </div>
+                </div>
+                <button type="submit" class="w-full py-2 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors">
+                    Σύνδεση
+                </button>
+            </form>
+        </div>
+        
+        <div class="text-center text-gray-600 dark:text-gray-400">
+            <p>Δεν έχετε λογαριασμό; <a href="#" class="text-indigo-600 dark:text-indigo-400 hover:underline">Εγγραφή</a></p>
+        </div>
+    </div>
+</div> 

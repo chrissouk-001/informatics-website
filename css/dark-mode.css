@@ -1,0 +1,54 @@
+.dark body {
+    background: linear-gradient(to bottom, #1a202c, #2d3748);
+    color: #e2e8f0;
+}
+
+.dark .bg-white {
+    background-color: #1e293b !important;
+    color: #e2e8f0;
+}
+
+.dark .text-gray-800 {
+    color: #e2e8f0 !important;
+}
+
+.dark .text-gray-600 {
+    color: #cbd5e0 !important;
+}
+
+.dark .bg-blue-50 {
+    background-color: rgba(59, 130, 246, 0.1) !important;
+}
+
+.dark .bg-green-50 {
+    background-color: rgba(16, 185, 129, 0.1) !important;
+}
+
+.dark .bg-purple-50 {
+    background-color: rgba(139, 92, 246, 0.1) !important;
+}
+
+.dark .border-purple-100 {
+    border-color: rgba(139, 92, 246, 0.2) !important;
+}
+
+.dark .bg-gray-50, .dark .bg-gray-100, .dark .bg-gray-200 {
+    background-color: #374151 !important;
+    color: #e2e8f0;
+}
+
+.dark .text-blue-800, .dark .text-green-800, .dark .text-purple-900 {
+    color: #e2e8f0 !important;
+}
+
+.dark .folder {
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.dark .folder:hover {
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+}
+
+.dark .search-box:focus {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+} 
