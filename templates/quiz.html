@@ -6,8 +6,8 @@
     <title>Quiz | Μαθήματα Πληροφορικής</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/dark-mode.css">
+    <link rel="stylesheet" href="../src/styles/style.css">
+    <link rel="stylesheet" href="../src/styles/dark-mode.css">
     <style>
         .quiz-option.selected {
             border-color: #4338CA;
@@ -180,17 +180,17 @@
     <!-- Script to load components -->
     <script>
         // Load components
-        fetch('../components/header.html')
+        fetch('../src/components/header.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('header-placeholder').innerHTML = data;
                 // Initialize dark mode after header is loaded
                 const script = document.createElement('script');
-                script.src = '../js/dark-mode.js';
+                script.src = '../src/scripts/dark-mode.js';
                 document.body.appendChild(script);
             });
             
-        fetch('../components/footer.html')
+        fetch('../src/components/footer.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('footer-placeholder').innerHTML = data;
@@ -198,79 +198,6 @@
     </script>
 
     <!-- Quiz JS -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const quizOptions = document.querySelectorAll('.quiz-option');
-            const resultContainer = document.getElementById('result-container');
-            const nextButton = document.getElementById('next-question');
-            
-            let optionSelected = false;
-            
-            // Timer functionality
-            let timeLeft = 15 * 60; // 15 minutes in seconds
-            const timerElement = document.getElementById('timer');
-            
-            function updateTimer() {
-                const minutes = Math.floor(timeLeft / 60);
-                const seconds = timeLeft % 60;
-                timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                
-                if (timeLeft > 0) {
-                    timeLeft--;
-                    setTimeout(updateTimer, 1000);
-                } else {
-                    alert('Ο χρόνος τελείωσε!');
-                }
-            }
-            
-            // Start timer
-            updateTimer();
-            
-            quizOptions.forEach(option => {
-                option.addEventListener('click', () => {
-                    if (optionSelected) return;
-                    
-                    optionSelected = true;
-                    const isCorrect = option.getAttribute('data-correct') === 'true';
-                    
-                    // Show selected indicator
-                    const indicator = option.querySelector('.option-indicator');
-                    indicator.classList.remove('hidden');
-                    option.classList.add('selected');
-                    
-                    if (isCorrect) {
-                        // Correct answer styling
-                        option.classList.add('correct');
-                        indicator.classList.add('bg-green-500');
-                        resultContainer.classList.remove('hidden');
-                        resultContainer.className = 'mb-4 p-4 rounded-lg bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-200 text-center';
-                        resultContainer.innerHTML = '<p class="font-medium"><i class="fas fa-check-circle mr-2"></i> Σωστά! Η HTML είναι η γλώσσα σήμανσης για τη δημιουργία ιστοσελίδων.</p>';
-                    } else {
-                        // Wrong answer styling
-                        option.classList.add('incorrect');
-                        indicator.classList.add('bg-red-500');
-                        
-                        // Highlight correct answer
-                        quizOptions.forEach(opt => {
-                            if (opt.getAttribute('data-correct') === 'true') {
-                                opt.classList.add('correct');
-                                const correctIndicator = opt.querySelector('.option-indicator');
-                                correctIndicator.classList.remove('hidden');
-                                correctIndicator.classList.add('bg-green-500');
-                            }
-                        });
-                        
-                        resultContainer.classList.remove('hidden');
-                        resultContainer.className = 'mb-4 p-4 rounded-lg bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-200 text-center';
-                        resultContainer.innerHTML = '<p class="font-medium"><i class="fas fa-times-circle mr-2"></i> Λάθος! Η σωστή απάντηση είναι: Hypertext Markup Language.</p>';
-                    }
-                });
-            });
-            
-            nextButton.addEventListener('click', () => {
-                alert('Αυτό είναι ένα δείγμα Quiz. Σε μια πλήρη εφαρμογή, θα μεταβαίνατε στην επόμενη ερώτηση.');
-            });
-        });
-    </script>
+    <script src="../src/scripts/quiz.js"></script>
 </body>
 </html> 

@@ -6,8 +6,8 @@
     <title>Μαθήματα Λυκείου | Πληροφορική</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/dark-mode.css">
+    <link rel="stylesheet" href="../src/styles/style.css">
+    <link rel="stylesheet" href="../src/styles/dark-mode.css">
 </head>
 <body class="min-h-screen font-sans text-gray-800">
     <!-- Include header -->
@@ -140,23 +140,23 @@
     <!-- Script to load components -->
     <script>
         // Load components
-        fetch('../components/header.html')
+        fetch('../src/components/header.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('header-placeholder').innerHTML = data;
                 // Initialize dark mode after header is loaded
                 const script = document.createElement('script');
-                script.src = '../js/dark-mode.js';
+                script.src = '../src/scripts/dark-mode.js';
                 document.body.appendChild(script);
             });
             
-        fetch('../components/footer.html')
+        fetch('../src/components/footer.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('footer-placeholder').innerHTML = data;
             });
             
-        fetch('../components/grade-modal.html')
+        fetch('../src/components/grade-modal.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('grade-modal-placeholder').innerHTML = data;
@@ -164,7 +164,7 @@
     </script>
     
     <!-- Main JS -->
-    <script src="../js/main.js"></script>
-    <script src="../js/notifications.js"></script>
+    <script src="../src/scripts/main.js"></script>
+    <script src="../src/scripts/notifications.js"></script>
 </body>
 </html> 

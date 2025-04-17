@@ -1,0 +1,140 @@
+<!-- Header Component -->
+<!-- Navbar -->
+<nav class="sticky top-0 z-40 backdrop-blur-md bg-white bg-opacity-80 shadow-sm transition-all duration-300">
+    <div class="container mx-auto px-4 py-3 max-w-6xl flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+            <a href="index.html" class="flex items-center space-x-2">
+                <div class="icon-container bg-purple-100 p-2 rounded-xl">
+                    <i class="fas fa-landmark text-purple-600"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-bold text-xl text-purple-700">EduPolis</span>
+                    <span class="text-xs text-gray-500 -mt-1">Η πόλη της γνώσης</span>
+                </div>
+            </a>
+            <div class="relative hidden md:block">
+                <input type="text" placeholder="Αναζήτηση..." class="search-box pl-10 pr-4 py-2 rounded-full bg-gray-100 focus:outline-none focus:ring focus:ring-purple-300 w-56 transition-all">
+                <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+            </div>
+        </div>
+        <div class="flex items-center space-x-4">
+            <div class="notifications-dropdown relative">
+                <button class="notifications-button relative p-2 rounded-full hover:bg-gray-200 transition-all">
+                    <i class="fas fa-bell text-gray-600"></i>
+                    <span class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-pink-500 text-white text-xs flex items-center justify-center animate-pulse">3</span>
+                </button>
+                
+                <div class="notifications-content hidden absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg overflow-hidden z-50 transform opacity-0 scale-95 transition-all duration-300">
+                    <div class="p-3 bg-purple-50 border-b border-gray-200">
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-bold text-gray-800">Ειδοποιήσεις</h3>
+                            <span class="text-xs bg-pink-500 text-white px-2 py-1 rounded-full">3 νέες</span>
+                        </div>
+                    </div>
+                    <div class="max-h-72 overflow-y-auto">
+                        <a href="#" class="block p-4 hover:bg-purple-50 border-b border-gray-200">
+                            <div class="flex">
+                                <div class="flex-shrink-0 mr-3">
+                                    <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
+                                        <i class="fas fa-book text-purple-600"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-800">Νέο μάθημα διαθέσιμο</p>
+                                    <p class="text-xs text-gray-500">Προστέθηκε το μάθημα "Εισαγωγή στην HTML5"</p>
+                                    <p class="text-xs text-gray-400 mt-1">πριν από 10 λεπτά</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="block p-4 hover:bg-purple-50 border-b border-gray-200">
+                            <div class="flex">
+                                <div class="flex-shrink-0 mr-3">
+                                    <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+                                        <i class="fas fa-trophy text-green-600"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-800">Ολοκλήρωση επιπέδου</p>
+                                    <p class="text-xs text-gray-500">Ολοκληρώσατε το επίπεδο "Βασικές Έννοιες"</p>
+                                    <p class="text-xs text-gray-400 mt-1">πριν από 2 ώρες</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="block p-4 hover:bg-purple-50">
+                            <div class="flex">
+                                <div class="flex-shrink-0 mr-3">
+                                    <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                                        <i class="fas fa-bullhorn text-blue-600"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-800">Νέος διαγωνισμός</p>
+                                    <p class="text-xs text-gray-500">Ξεκίνησε ο διαγωνισμός "Πανελλήνιος Διαγωνισμός Πληροφορικής"</p>
+                                    <p class="text-xs text-gray-400 mt-1">πριν από 1 μέρα</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="p-3 bg-purple-50 border-t border-gray-200 text-center">
+                        <a href="#" class="text-purple-600 text-sm font-medium hover:underline">Προβολή όλων</a>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="login-button btn-primary hidden md:flex">
+                <i class="fas fa-user-circle mr-2"></i>
+                Σύνδεση
+            </button>
+            <button class="mobile-menu-button p-2 rounded-lg bg-purple-600 text-white md:hidden">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<header class="text-center mb-16">
+    <div class="hero-gradient p-8 rounded-2xl mb-6 shadow-lg text-white relative overflow-hidden">
+        <!-- City skyline silhouette overlay -->
+        <div class="absolute bottom-0 left-0 w-full h-16 opacity-20">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="#ffffff"></path>
+                <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" fill="#ffffff"></path>
+                <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="#ffffff"></path>
+            </svg>
+        </div>
+        
+        <!-- City-themed icons -->
+        <div class="absolute opacity-10 text-white">
+            <i class="fas fa-university text-6xl absolute top-10 left-10 transform -rotate-12"></i>
+            <i class="fas fa-graduation-cap text-5xl absolute top-32 right-20 transform rotate-12"></i>
+            <i class="fas fa-book text-4xl absolute bottom-24 left-1/4 transform -rotate-6"></i>
+            <i class="fas fa-laptop-code text-5xl absolute bottom-12 right-1/3 transform rotate-6"></i>
+        </div>
+        
+        <h1 class="text-5xl font-bold mb-4 relative">EduPolis</h1>
+        <p class="text-xl opacity-90 relative">Η πόλη της γνώσης - Εκπαιδευτικό υλικό για όλους</p>
+        <div class="flex justify-center gap-6 mt-6 relative">
+            <div class="badge bg-white bg-opacity-20 backdrop-blur-sm text-white">
+                <i class="fas fa-landmark mr-2"></i>
+                <span>Λύκειο</span>
+            </div>
+            <div class="badge bg-white bg-opacity-20 backdrop-blur-sm text-white">
+                <i class="fas fa-building mr-2"></i>
+                <span>Γυμνάσιο</span>
+            </div>
+            <div class="badge bg-white bg-opacity-20 backdrop-blur-sm text-white">
+                <i class="fas fa-trophy mr-2"></i>
+                <span>Διαγωνισμοί</span>
+            </div>
+        </div>
+        <!-- Mobile Search -->
+        <div class="relative mt-6 md:hidden">
+            <input type="text" placeholder="Αναζήτηση..." class="search-box w-full pl-10 pr-4 py-2 rounded-full bg-white bg-opacity-20 focus:bg-white focus:text-gray-800 focus:outline-none focus:ring focus:ring-purple-300 transition-all">
+            <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-white"></i>
+        </div>
+    </div>
+</header>
+
+<!-- Notification Container -->
+<div id="notification-container" class="fixed bottom-4 right-4 z-50 flex flex-col space-y-4"></div> 
